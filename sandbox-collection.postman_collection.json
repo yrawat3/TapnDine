@@ -1,0 +1,2393 @@
+{
+	"info": {
+		"_postman_id": "4b21be96-4d48-4a7a-9370-e4601f0e2ce0",
+		"name": "BSP Sandbox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"order-id\", jsonData.id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"additionalReferenceIds\": {\n        \"someRefID\": \"myCustomReferenceID\"\n    },\n    \"bagCount\": 4,\n    \"channel\": \"Web\",\n    \"checkInDetails\": {\n        \"application\": \"POS\",\n        \"location\": \"Store Front\",\n        \"origin\": {\n            \"id\": 12,\n            \"type\": \"web\"\n        },\n        \"vector\": {\n            \"id\": 75,\n            \"type\": \"terminal\"\n        }\n    },\n    \"comments\": \"A comment left on the order\",\n    \"currency\": \"USD\",\n    \"customer\": {\n        \"email\": \"ruben.bear@ncr.com\",\n        \"externalIds\": [\n            {\n                \"lineId\": \"ruben-1\",\n                \"type\": \"Loyalty\",\n                \"value\": \"A member of the loyalty program\"\n            }\n        ],\n        \"firstName\": \"Ruben\",\n        \"fiscalId\": \"ruben-fiscal-identification\",\n        \"id\": \"ruben-identification\",\n        \"lastName\": \"The Bear\",\n        \"name\": \"Ruben The Bear\",\n        \"phone\": \"123-456-7890\"\n    },\n    \"errorDescription\": \"There was an error while creating the order\",\n    \"fees\": [\n        {\n            \"amount\": 56.65,\n            \"lineId\": \"line-id\",\n            \"override\": true,\n            \"provider\": \"fee-servicing-provider\",\n            \"type\": \"Delivery\"\n        }\n    ],\n    \"fulfillment\": {\n        \"address\": {\n            \"businessInfo\": {\n                \"department\": \"Devex\",\n                \"name\": \"NCR\"\n            },\n            \"city\": \"Atlanta\",\n            \"coordinates\": {\n                \"latitude\": 33.6817952,\n                \"longitude\": -84.4239568\n            },\n            \"country\": \"United States of America\",\n            \"crossStreets\": [\n                {\n                    \"name\": \"Peachtree St\"\n                }\n            ],\n            \"line1\": \"864 Peachtree St\",\n            \"notes\": \"Please deliver to Ruben The Bear!\",\n            \"postalCode\": \"30308\",\n            \"state\": \"Georgia\",\n            \"type\": \"Business\"\n        },\n        \"autoRelease\": false,\n        \"catering\": true,\n        \"leadTimes\": [\n            {\n                \"interval\": 83,\n                \"intervalUnits\": \"Minutes\",\n                \"type\": \"Transit\"\n            }\n        ],\n        \"notes\": \"Please deliver to Ruben The Bear\",\n        \"type\": \"Delivery\"\n    },\n    \"orderLines\": [\n        {\n            \"description\": \"The description of the order line\",\n            \"extendedAmount\": 20.8,\n            \"fulfillmentResult\": \"Fulfilled\",\n            \"itemType\": \"Tare\",\n            \"linkGroupCode\": \"Hospitality-Link-Group-Code\",\n            \"modifierCode\": \"well done\",\n            \"notes\": [\n                {\n                    \"type\": \"Substitutions\",\n                    \"value\": \"Lightly salted\"\n                },\n                {\n                    \"type\": \"Preferences\",\n                    \"value\": \"No pickles\"\n                }\n            ],\n            \"overridePrice\": true,\n            \"priceModifiers\": [\n                {\n                    \"amount\": 1.99,\n                    \"description\": \"Extra Cheese\"\n                }\n            ],\n            \"productId\": {\n                \"type\": \"UPC\",\n                \"value\": \"Cheeseburger\"\n            },\n            \"quantity\": {\n                \"unitOfMeasure\": \"EA\",\n                \"unitOfMeasureLabel\": \"lbs\",\n                \"value\": 78.55\n            },\n            \"scanData\": \"Any data that pertains to a POS that scans a bar code\",\n            \"substitutionAllowed\": true,\n            \"supplementalData\": \"Any supplemental data that pertains to an order\",\n            \"taxes\": [\n                {\n                    \"amount\": 92.85,\n                    \"code\": \"Sales-Tax\",\n                    \"isIncluded\": true,\n                    \"percentage\": 0.07\n                }\n            ],\n            \"unitPrice\": 26.5\n        }\n    ],\n    \"owner\": \"Ruben's Hamburger Hut\",\n    \"partySize\": 1,\n    \"payments\": [\n        {\n            \"accountNumber\": \"12345678901234\",\n            \"amount\": 42.1,\n            \"description\": \"A description for the payment\",\n            \"expiration\": {\n                \"month\": 11,\n                \"year\": 2031\n            },\n            \"gratuity\": 48.35,\n            \"payBalance\": true,\n            \"status\": \"Authorized\",\n            \"type\": \"Cash\"\n        }\n    ],\n    \"pickupContact\": {\n        \"company\": \"NCR\",\n        \"hasArrived\": false,\n        \"name\": \"Ruben\",\n        \"phone\": \"123-456-7890\",\n        \"vehicle\": {\n            \"color\": \"Silver\",\n            \"licensePlate\": \"ABC1234\",\n            \"make\": \"Porsche\",\n            \"model\": \"911 Turbo\",\n            \"year\": \"2017\"\n        }\n    },\n    \"promotions\": [\n        {\n            \"adjustment\": {\n                \"applied\": null,\n                \"level\": \"ITEM\",\n                \"type\": \"PROMO\"\n            },\n            \"amount\": 50.25,\n            \"numGuests\": 97,\n            \"orderLineGroups\": [\n                {\n                    \"name\": \"Name of an order line group\",\n                    \"orderLineIds\": [\n                        \"order-line-id\"\n                    ]\n                }\n            ],\n            \"supportingData\": \"Any extra supporting data of the promotion\"\n        }\n    ],\n    \"revenueCenter\": \"bar\",\n    \"status\": \"OrderPlaced\",\n    \"taxExempt\": false,\n    \"taxes\": [\n        {\n            \"active\": true,\n            \"amount\": 6.4,\n            \"code\": \"Servoce\",\n            \"description\": \"Service tax\",\n            \"isIncluded\": false,\n            \"percentage\": 52.4\n        }\n    ],\n    \"totals\": [\n        {\n            \"type\": \"Net\",\n            \"value\": 27.45\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{order-service}}",
+							"host": [
+								"{{order-service}}"
+							]
+						},
+						"description": "Creates an order under the provided enterprise unit and organization"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service}}/{{order-id}}",
+							"host": [
+								"{{order-service}}"
+							],
+							"path": [
+								"{{order-id}}"
+							]
+						},
+						"description": "Gets an Order. The order ID is automatically saved when calling Create. The '{{order-id}}' in the request URL can be replaced by a different order id."
+					},
+					"response": []
+				},
+				{
+					"name": "Find Orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"enterpriseUnitId\": \"{{bsp-site-id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{order-service}}/find",
+							"host": [
+								"{{order-service}}"
+							],
+							"path": [
+								"find"
+							]
+						},
+						"description": "Creates an order under the provided enterprise unit and organization"
+					},
+					"response": []
+				},
+				{
+					"name": "Replace Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bagCount\": 4,\n    \"fulfillment\": {\n      \"address\": {\n        \"type\": \"Business\",\n        \"line1\": \"New Address Line 1\",\n        \"city\": \"New York\",\n        \"state\": \"NY\",\n        \"country\": \"USA\",\n        \"postalCode\": \"10001\",\n        \"notes\": \"New Location\",\n        \"businessInfo\": {\n          \"name\": \"New Business\",\n          \"department\": \"Software\"\n        }\n      },\n      \"leadTimes\": [\n        {\n          \"type\": \"Setup\",\n          \"interval\": 10,\n          \"intervalUnits\": \"Minutes\",\n          \"lineId\": \"leadTime1\"\n        }\n      ],\n      \"notes\": \"Deliver to Times Square\",\n      \"type\": \"Pickup\",\n      \"autoRelease\": true\n    },\n    \"fees\": [\n      {\n        \"type\": \"Web\",\n        \"provider\": \"NY\",\n        \"amount\": 0,\n        \"override\": true,\n        \"lineId\": \"fee1\",\n        \"groupMemberId\": \"groupMember1\"\n      }\n    ],\n    \"pickupContact\": {\n        \"company\": \"NCR\",\n        \"hasArrived\": false,\n        \"name\": \"Ruben\",\n        \"phone\": \"123-456-7890\",\n        \"vehicle\": {\n            \"color\": \"Silver\",\n            \"licensePlate\": \"ABC1234\",\n            \"make\": \"Porsche\",\n            \"model\": \"911 Turbo\",\n            \"year\": \"2017\"\n        }\n    },\n    \"promotions\": [\n        {\n            \"adjustment\": {\n                \"applied\": null,\n                \"level\": \"ITEM\",\n                \"type\": \"PROMO\"\n            },\n            \"amount\": 50.25,\n            \"numGuests\": 97,\n            \"orderLineGroups\": [\n                {\n                    \"name\": \"Name of an order line group\",\n                    \"orderLineIds\": [\n                        \"order-line-id\"\n                    ]\n                }\n            ],\n            \"supportingData\": \"Any extra supporting data of the promotion\"\n        }\n    ],\n    \"orderLines\": [\n      {\n        \"comments\": \"New Order Line\",\n        \"description\": \"This is a new order line\",\n        \"extendedAmount\": 0,\n        \"itemType\": \"string\",\n        \"notes\": [\n          {\n            \"type\": \"Substitutions\",\n            \"value\": \"No Pickle\"\n          }\n        ],\n        \"parentLineId\": \"string\",\n        \"priceModifiers\": [\n          {\n            \"amount\": 1.99,\n            \"description\": \"Extra Cheese\"\n          }\n        ],\n        \"productId\": {\n          \"type\": \"Cheeseburger\",\n          \"value\": \"Cheeseburger meal\"\n        },\n        \"quantity\": {\n          \"unitOfMeasure\": \"EA\",\n          \"unitOfMeasureLabel\": \"lbs\",\n          \"value\": 0\n        },\n        \"substitutionAllowed\": true,\n        \"taxes\": [\n          {\n            \"amount\": 1.48,\n            \"code\": \"Sales Tax\",\n            \"isIncluded\": true,\n            \"percentage\": 0.07\n          }\n        ],\n        \"unitPrice\": 0,\n        \"scanData\": \"Data that is taken from a bar code\",\n        \"supplementalData\": \"Any supplemental data needed for the order\",\n        \"lineReplaced\": \"replacedLineId\",\n        \"fulfillmentResult\": \"Fulfilled\",\n        \"groupMemberId\": \"groupMember1\",\n        \"overridePrice\": true,\n        \"lineId\": \"orderLine1\"\n      },\n      {\n        \"description\": \"Replaced Line Item\",\n        \"fulfillmentStatus\": \"Replaced\",\n        \"lineId\": \"replacedLineId\"\n      }\n    ],\n    \"payments\": [\n      {\n        \"amount\": 12,\n        \"gratuity\": 2,\n        \"status\": \"Paid\",\n        \"type\": \"CreditDebit\",\n        \"subType\": \"string\",\n        \"maskedPAN\": \"************1234\",\n        \"token\": \"string\",\n        \"payBalance\": true,\n        \"accountNumber\": \"1234567890123\",\n        \"expiration\": {\n          \"month\": 12,\n          \"year\": 2022\n        },\n        \"lineId\": \"payment1\",\n        \"groupMemberId\": \"groupMember1\"\n      }\n    ],\n    \"taxes\": [\n      {\n        \"amount\": 1.48,\n        \"code\": \"Sales Tax\",\n        \"description\": \"sales tax on item\",\n        \"isIncluded\": true,\n        \"percentage\": 0.07,\n        \"active\": true,\n        \"groupMemberId\": \"groupMember1\"\n      }\n    ],\n    \"additionalReferenceIds\": {\n      \"someRefID\": \"myCustomReferenceID\"\n    },\n    \"taxExempt\": false,\n    \"totalModifiers\": [\n      {\n        \"amount\": 0,\n        \"description\": \"A description of any extra modifiers\",\n        \"referenceId\": \"referenceId1\",\n        \"lineId\": \"totalModifier1\",\n        \"groupMemberId\": \"groupMember1\"\n      }\n    ],\n    \"partySize\": 1,\n    \"comments\": \"PUT Replaces The Entire Order\",\n    \"channel\": \"Web\",\n    \"currency\": \"USD\",\n    \"customer\": {\n        \"email\": \"ruben.bear@ncr.com\",\n        \"externalIds\": [\n            {\n                \"lineId\": \"ruben-1\",\n                \"type\": \"Loyalty\",\n                \"value\": \"A member of the loyalty program\"\n            }\n        ],\n        \"firstName\": \"Ruben\",\n        \"fiscalId\": \"ruben-fiscal-identification\",\n        \"id\": \"ruben-identification\",\n        \"lastName\": \"The Bear\",\n        \"name\": \"Ruben The Bear\",\n        \"phone\": \"123-456-7890\"\n    },\n    \"groupMembers\": [\n      {\n        \"name\": \"New Customer\",\n        \"firstName\": \"New\",\n        \"lastName\": \"Customer\",\n        \"externalIds\": {\n          \"anotherMemberID\": \"Some Custom Identifier\",\n          \"newlyAddedID\": \"Another Custom Identifier\"\n        },\n        \"lineId\": \"groupMember1\"\n      }\n    ],\n    \"errorDescription\": \"An error has occurred with this order\",\n    \"owner\": \"New Owner\",\n    \"referenceId\": \"someCustomIdentifier\",\n    \"source\": \"Phone Order\",\n    \"status\": \"OrderPlaced\",\n    \"totals\": [\n      {\n        \"type\": \"Net\",\n        \"value\": 0,\n        \"lineId\": \"total1\"\n      }\n    ],\n    \"checkInDetails\": {\n      \"location\": \"customer service\",\n      \"application\": \"app2\",\n      \"origin\": {\n        \"id\": 1234,\n        \"type\": \"iphone\"\n      },\n      \"vector\": {\n        \"id\": 3210,\n        \"type\": \"terminal\"\n      }\n    }\n  }"
+						},
+						"url": {
+							"raw": "{{order-service}}/{{order-id}}",
+							"host": [
+								"{{order-service}}"
+							],
+							"path": [
+								"{{order-id}}"
+							]
+						},
+						"description": "This call replaces the entire Order, referenced by the order id, with the provided order data."
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Order",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderLines\": [\n      {\n        \"comments\": \"Existing Order Lines can be Updated\",\n        \"description\": \"This is a single order line that has been patched\",\n        \"lineId\": \"orderLine1\"\n      },\n      {\n          \"description\": \"A New Order Line Can be Added\",\n          \"fulfillmentStatus\": \"Fulfilled\",\n          \"lineId\": \"newOrderLine\"\n      }\n    ],\n    \"partySize\": 2,\n    \"pickupContact\": {\n        \"name\": \"John\",\n      \"vehicle\": {\n          \"model\": \"Leaf\",\n          \"year\": \"2017\",\n          \"color\": \"blue\"\n          \n      }\n    },\n    \"comments\": \"PATCH Only Replaces The Provided Fields\",\n    \"channel\": \"Web\",\n    \"groupMembers\": [\n      {\n        \"name\": \"Jane Doe\",\n        \"firstName\": \"Jane\",\n        \"lineId\": \"groupMember1\"\n      }\n    ],\n    \"errorDescription\": \"An error has occurred while patching the order\",\n    \"owner\": \"NCR\",\n    \"referenceId\": \"someCustomIdentifier\",\n    \"source\": \"Online Order\",\n    \"status\": \"InFulfillment\",\n    \"promotions\": [\n          {\n              \"lineId\": \"b7008bf5aae846599a18182f0ee8b00b\",\n              \"referenceId\": \"9887665443221\",\n              \"supportingData\": \"ABC4567890\",\n              \"amount\": 5.99,\n              \"numGuests\": 5,\n              \"orderLineGroups\": [\n                  {\n                      \"lineId\": \"c9593dadbf1748df829de5ba7372cec2\",\n                      \"name\": \"Value Combo #5\",\n                      \"orderLineIds\": [\n                          \"b0394f38690e4ad4aa5732c654e99f7a\",\n                          \"9fe7880229bc4a56bb1634cf63c75b44\",\n                          \"fd5e63eb38bf4aa8b0f4b85f57a3d601\",\n                          \"ad6f13666a644da88eb0cd9e777c54bb\"\n                      ]\n                  }\n              ],\n              \"adjustment\": {\n                  \"level\": \"ORDER\",\n                  \"type\": \"PROMO\",\n                  \"applied\": false\n              }\n          }\n      ], \n    \"checkInDetails\": {\n        \"application\": \"app3\",\n        \"origin\": {\n            \"type\": \"Aloha\"\n        },\n        \"vector\": {\n            \"type\": \"printer\"\n      }\n    }\n  }"
+						},
+						"url": {
+							"raw": "{{order-service}}/{{order-id}}",
+							"host": [
+								"{{order-service}}"
+							],
+							"path": [
+								"{{order-id}}"
+							]
+						},
+						"description": "Patches an Order. Only the fields that are specified in the body of the request will be updated, while the rest will remain unchanged on the order. Specified line items can be updated if the lineId is provided, while new line IDs or line items without an ID will be created and added to that collection."
+					},
+					"response": []
+				},
+				{
+					"name": "Find Unacknowledged Orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service}}/find-unacknowledged",
+							"host": [
+								"{{order-service}}"
+							],
+							"path": [
+								"find-unacknowledged"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Acknowledge An Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service}}/{{order-id}}/acks",
+							"host": [
+								"{{order-service}}"
+							],
+							"path": [
+								"{{order-id}}",
+								"acks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lock An Order",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var deviceId = 111;\r",
+									"pm.environment.set(\"nr1-device-id\", deviceId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "nr1-device-id",
+								"value": "{{nr1-device-id}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service}}/{{order-id}}/lock",
+							"host": [
+								"{{order-service}}"
+							],
+							"path": [
+								"{{order-id}}",
+								"lock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlock An Order",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var deviceId = 111;\r",
+									"pm.environment.set(\"nr1-device-id\", deviceId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}",
+								"type": "text"
+							},
+							{
+								"key": "nr1-device-id",
+								"value": "{{nr1-device-id}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{order-service}}/{{order-id}}/unlock",
+							"host": [
+								"{{order-service}}"
+							],
+							"path": [
+								"{{order-id}}",
+								"unlock"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TDM",
+			"item": [
+				{
+					"name": "Create Tlog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var uuid = require('uuid'); ",
+									"var tlogId = uuid.v4(); ",
+									"postman.setEnvironmentVariable(\"tlog-id\", tlogId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tlogData\": [{\n\t    \"id\": \"{{tlog-id}}\",\n\t    \"modelVersion\": 1,\n\t    \"siteInfo\": {\n\t        \"name\": \"My Store Name\",\n\t        \"id\": \"5\",\n\t        \"siteTimeZone\": {\n\t            \"timeZone\": \"America/New_York\"\n\t        }\n\t    },\n\t    \"transactionNumber\": \"12345\",\n\t    \"openDateTimeUtc\": {\n\t        \"dateTime\": \"2020-01-30T12:46:47Z\",\n\t        \"originalOffset\": \"-04:00\"\n\t    },\n\t    \"documentExpirationDate\": null,\n\t    \"closeDateTimeUtc\": {\n\t        \"dateTime\": \"2020-01-30T13:06:39Z\",\n\t        \"originalOffset\": \"-04:00\"\n\t    },\n\t    \"touchPointId\": \"3\",\n\t    \"configurationDateTimeUtc\": null,\n\t    \"touchPointType\": \"POS\",\n\t    \"touchPointGroup\": \"Terminal\",\n\t    \"dataProviderName\": \"MyPOS\",\n\t    \"dataProviderVersion\": \"2.0\",\n\t    \"businessDay\": {\n\t        \"dateTime\": \"2020-01-30T00:00:00Z\",\n\t        \"originalOffset\": \"-04:00\"\n\t    },\n\t    \"isTrainingMode\": false,\n\t    \"linkedTransactions\": [],\n\t    \"transactionReason\": null,\n\t    \"tlog\": {\n\t        \"receiptId\": \"32111\",\n\t        \"receiptInfo\": null,\n\t        \"location\": {\n\t            \"locationId\": \"5\",\n\t            \"location\": \"Table 5\"\n\t        },\n\t        \"revenueCenter\": {\n\t            \"id\": \"1\",\n\t            \"name\": \"Restaurant\"\n\t        },\n\t        \"isVoided\": false,\n\t        \"voidInfo\": null,\n\t        \"isSuspended\": false,\n\t        \"isResumed\": false,\n\t        \"isRecalled\": false,\n\t        \"isDeleted\": false,\n\t        \"transactionType\": \"SALES\",\n\t        \"localCurrency\": {\n\t            \"code\": \"USD\"\n\t        },\n\t        \"employees\": [\n\t            {\n\t                \"id\": \"1234\",\n\t                \"name\": \"John Snow\",\n\t                \"shiftId\": \"0\",\n\t                \"isTippableEmployee\": true,\n\t                \"roleId\": \"1\",\n\t                \"roleName\": \"Server\",\n\t                \"action\": null,\n\t                \"actionLabel\": null\n\t            }\n\t        ],\n\t        \"totals\": {\n\t            \"taxInclusive\": {\n\t                \"amount\": 0.0000000000\n\t            },\n\t            \"taxExclusive\": {\n\t                \"amount\": 1.1600000000\n\t            },\n\t            \"returnItemsTaxInclusive\": {\n\t                \"amount\": 0.0000000000\n\t            },\n\t            \"returnItemsTaxExclusive\": {\n\t                \"amount\": 0.0000000000\n\t            },\n\t            \"taxExemptAmount\": {\n\t                \"amount\": 0.0000000000\n\t            },\n\t            \"discountAmount\": {\n\t                \"amount\": 0.0000000000\n\t            },\n\t            \"grossAmount\": {\n\t                \"amount\": 13.0000000000\n\t            },\n\t            \"grandAmount\": {\n\t                \"amount\": 14.1600000000\n\t            },\n\t            \"voidsAmount\": {\n\t                \"amount\": 0.0000000000\n\t            },\n\t            \"grossReturnsAmount\": {\n\t                \"amount\": 0.0000000000\n\t            },\n\t            \"netAmount\": {\n\t                \"amount\": 13.0000000000\n\t            }\n\t        },\n\t        \"customer\": null,\n\t        \"loyaltyAccount\": [],\n\t        \"totalTaxes\": [\n\t            {\n\t                \"id\": \"tax_12345_1\",\n\t                \"name\": \"Sales Tax\",\n\t                \"taxExempt\": null,\n\t                \"taxType\": \"TAX_EXCLUSIVE\",\n\t                \"taxTypeLabel\": null,\n\t                \"taxableAmount\": {\n\t                    \"amount\": 13.0000000000\n\t                },\n\t                \"amount\": {\n\t                    \"amount\": 1.1600000000\n\t                },\n\t                \"isRefund\": false,\n\t                \"isVoided\": false,\n\t                \"taxPercent\": 0.09,\n\t                \"taxTypeCode\": null,\n\t                \"taxTypeCodeLabel\": null,\n\t                \"taxSaleTypeCode\": null,\n\t                \"taxSaleTypeCodeLabel\": null\n\t            }\n\t        ],\n\t        \"items\": [\n\t            {\n\t                \"id\": \"123456\",\n\t                \"parentItemId\": null,\n\t                \"productId\": \"1234\",\n\t                \"productName\": \"Pizza\",\n\t                \"variations\": [],\n\t                \"departmentId\": null,\n\t                \"revenueCenter\": {\n\t                    \"id\": \"1\",\n\t                    \"name\": \"Restaurant\"\n\t                },\n\t                \"isReturn\": false,\n\t                \"isInventoryAffectedByReturn\": false,\n\t                \"isVoided\": false,\n\t                \"isItemNotOnFile\": false,\n\t                \"voidInfo\": null,\n\t                \"regularUnitPrice\": {\n\t                    \"amount\": 13.0000000000\n\t                },\n\t                \"extendedUnitPrice\": {\n\t                    \"amount\": 13.0000000000\n\t                },\n\t                \"actualUnitPrice\": {\n\t                    \"amount\": 13.0000000000\n\t                },\n\t                \"extendedAmount\": {\n\t                    \"amount\": 13.0000000000\n\t                },\n\t                \"actualAmount\": {\n\t                    \"amount\": 13.0000000000\n\t                },\n\t                \"quantity\": {\n\t                    \"quantity\": 1.0000000000,\n\t                    \"unitOfMeasurement\": \"PIECE\",\n\t                    \"unitOfMeasurementLabel\": null\n\t                },\n\t                \"inventoryQuantity\": null,\n\t                \"isWeighted\": false,\n\t                \"isOverridden\": false,\n\t                \"overrideInfo\": null,\n\t                \"orderNumber\": \"1\",\n\t                \"employee\": {\n\t                    \"id\": \"1234\",\n\t                    \"name\": \"John Snow\",\n\t                    \"shiftId\": \"0\",\n\t                    \"isTippableEmployee\": true,\n\t                    \"roleId\": \"1\",\n\t                    \"roleName\": \"Server\",\n\t                    \"action\": null,\n\t                    \"actionLabel\": null\n\t                },\n\t                \"itemPromotions\": [],\n\t                \"itemDiscounts\": [],\n\t                \"itemTaxes\": [\n\t                    {\n\t                        \"id\": \"tax_12345_1\",\n\t                        \"name\": \"Sales Tax\",\n\t                        \"taxExempt\": null,\n\t                        \"taxType\": \"TAX_EXCLUSIVE\",\n\t                        \"taxTypeLabel\": null,\n\t                        \"taxableAmount\": {\n\t                            \"amount\": 13.0000000000\n\t                        },\n\t                        \"amount\": {\n\t                            \"amount\": 1.1600000000\n\t                        },\n\t                        \"isRefund\": false,\n\t                        \"isVoided\": false,\n\t                        \"taxPercent\": 0.09,\n\t                        \"taxTypeCode\": null,\n\t                        \"taxTypeCodeLabel\": null,\n\t                        \"taxSaleTypeCode\": null,\n\t                        \"taxSaleTypeCodeLabel\": null\n\t                    }\n\t                ],\n\t                \"category\": {\n\t                    \"id\": \"7\",\n\t                    \"name\": \"Food\"\n\t                },\n\t                \"surcharges\": [],\n\t                \"isNonSaleItem\": false,\n\t                \"itemSellType\": \"SALES\",\n\t                \"itemSellTypeLabel\": null,\n\t                \"conceptId\": null,\n\t                \"beginDateTimeUtc\": {\n\t                    \"dateTime\": \"2020-01-30T12:46:39Z\",\n\t                    \"originalOffset\": \"-04:00\"\n\t                },\n\t                \"endDateTimeUtc\": {\n\t                    \"dateTime\": \"2020-01-30T13:06:39Z\",\n\t                    \"originalOffset\": \"-04:00\"\n\t                },\n\t                \"entryMethod\": \"KEYED\",\n\t                \"entryMethodLabel\": null,\n\t                \"catalogItemCode\": null,\n\t                \"isRefused\": false,\n\t                \"refusalInfo\": null,\n\t                \"operatorBypassApprovalInfo\": null,\n\t                \"operatorBypassApprovals\": [],\n\t                \"itemLinkType\": null,\n\t                \"itemLinkTypeLabel\": null,\n\t                \"itemPharmacyInfo\": null,\n\t                \"returnInfo\": null,\n\t                \"inputIdentifierData\": null,\n\t                \"fuelSaleInfo\": null\n\t            }\n\t        ],\n\t        \"orders\": [\n\t            {\n\t                \"orderNumber\": \"1\",\n\t                \"orderMode\": {\n\t                    \"id\": \"1\",\n\t                    \"name\": \"ORDER\"\n\t                },\n\t                \"orderChannel\": \"WALK_IN\",\n\t                \"orderChannelLabel\": null,\n\t                \"orderSource\": \"POS\"\n\t            }\n\t        ],\n\t        \"tenders\": [\n\t            {\n\t                \"id\": \"12345\",\n\t                \"name\": \"Am Ex\",\n\t                \"type\": \"CREDIT_CARD\",\n\t                \"typeLabel\": null,\n\t                \"tenderAmount\": {\n\t                    \"amount\": 14.1600000000\n\t                },\n\t                \"currency\": null,\n\t                \"originalAmount\": null,\n\t                \"exchangeRate\": null,\n\t                \"tipAmount\": {\n\t                    \"amount\": 0.0000000000\n\t                },\n\t                \"tipReductionAmount\": null,\n\t                \"overpaymentAmount\": null,\n\t                \"usage\": \"PAYMENT\",\n\t                \"isVoided\": false,\n\t                \"voidInfo\": null,\n\t                \"cashDrawerId\": \"0\",\n\t                \"surcharges\": [],\n\t                \"cardLastFourDigits\": \"1234\",\n\t                \"employee\": {\n\t                    \"id\": \"1234\",\n\t                    \"name\": \"John Snow\",\n\t                    \"shiftId\": \"0\",\n\t                    \"isTippableEmployee\": true,\n\t                    \"roleId\": \"1\",\n\t                    \"roleName\": \"Server\",\n\t                    \"action\": null,\n\t                    \"actionLabel\": null\n\t                },\n\t                \"authorizationCode\": \"APPROVE\",\n\t                \"authorizationCodeLabel\": null,\n\t                \"lineNumber\": 0,\n\t                \"tenderLink\": null,\n\t                \"smartWIC\": null,\n\t                \"authorizationResponseTime\": {\n\t                    \"dateTime\": \"2020-01-30T13:06:39Z\",\n\t                    \"originalOffset\": \"-04:00\"\n\t                },\n\t                \"promotionId\": null,\n\t                \"maskedCardNumber\": null,\n\t                \"tenderAuthorization\": {\n\t                    \"authorizationCodeNumber\" : \"12345\",\n\t                    \"referenceNumber\" : \"1\",\n\t                    \"requestedAmount\" : {\n\t                        \"amount\": 14.1600000000\n\t                    },\n\t                    \"authorizationDateTime\" : {\n\t                        \"dateTime\": \"2020-01-30T13:06:39Z\",\n\t                        \"originalOffset\": \"-04:00\"\n\t                    },\n\t                    \"authorizationType\" : \"Online\",\n\t                    \"cardTypeId\" : \"6\",\n\t                    \"paymentProvider\" : {\n\t                        \"epsTerminalId\" : \"123\",\n\t                        \"epsName\" : \"Connected Payment\",\n\t                        \"responseCode\" : \"123\"\n\t                    },\n\t                    \"isSignatureRequired\" : false,\n\t                    \"isVerifiedByPIN\" : true,\n\t                    \"isElectronicSignature\" : true\n\t                },\n\t                \"tenderEndDateTime\": {\n\t                    \"dateTime\": \"2020-01-30T13:06:39Z\",\n\t                    \"originalOffset\": \"-04:00\"\n\t                },\n\t                \"checkInfo\": null,\n\t                \"nameOnCard\": \"Ellaria Sand\",\n\t                \"couponId\": null\n\t            }\n\t        ],\n\t        \"transactionPromotions\": [],\n\t        \"transactionDiscounts\": [],\n\t        \"coupons\": [],\n\t        \"surcharges\": [],\n\t        \"customerCount\": 2,\n\t        \"receiptDeliveryInfo\": null,\n\t        \"checkOutType\": \"UNKNOWN\",\n\t        \"checkOutTypeLabel\": null,\n\t        \"operatorBypassApprovals\": [],\n\t        \"pharmacyDetails\": null\n\t    },\n\t    \"transactionCategory\": \"SALE_OR_RETURN\"\n\t}]\n}\t"
+						},
+						"url": {
+							"raw": "{{tdm-service}}",
+							"host": [
+								"{{tdm-service}}"
+							]
+						},
+						"description": "Creates a Transaction in the organization."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tlog by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}"
+							}
+						],
+						"url": {
+							"raw": "{{tdm-service}}/{{tlog-id}}",
+							"host": [
+								"{{tdm-service}}"
+							],
+							"path": [
+								"{{tlog-id}}"
+							]
+						},
+						"description": "Retrieves a transaction in an organization. The tlog ID is automatically saved when calling Create. The '{{tlog-id}}' in the request URL can be replaced by a different transactoin id."
+					},
+					"response": []
+				},
+				{
+					"name": "Find Tlogs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"fromTransactionDateTimeUtc\": {\n        \"dateTime\": \"2020-01-01T00:00:00.000Z\"\n    },\n    \"toTransactionDateTimeUtc\": {\n        \"dateTime\": \"2021-01-01T00:00:00.000Z\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{tdm-service}}/find",
+							"host": [
+								"{{tdm-service}}"
+							],
+							"path": [
+								"find"
+							]
+						},
+						"description": "Searches for transactions matching provided criteria in an organization"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "Create Catalog Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-us",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"version\": 1,\n    \"packageIdentifiers\": [\n        {\n            \"type\": \"Type_1\",\n            \"value\": \"value_1\"\n        }\n    ],\n    \"longDescription\": {\n        \"values\": [\n            {\n                \"locale\": \"en-US\",\n                \"value\": \"Sample text in American English\"\n            },\n            {\n                \"locale\": \"fr-ca\",\n                \"value\": \"Sample text in French Canadian\"\n            },\n            {\n                \"locale\": \"en-br\",\n              \"value\": \"Sample text in American English\"\n            }\n        ]\n    },\n    \"shortDescription\": {\n        \"values\": [\n            {\n                \"locale\": \"en-US\",\n                \"value\": \"Sample text in American English\"\n            },\n            {\n                \"locale\": \"fr-ca\",\n                \"value\": \"Sample text in French Canadian\"\n            },\n            {\n                \"locale\": \"en-br\",\n                \"value\": \"Sample text in American English\"\n            }\n        ]\n    },\n    \"merchandiseCategory\": {\n        \"nodeId\": \"1-846-188-450\"\n    },\n    \"alternateCategories\": [\n        {\n            \"nodeId\": \"1-846-188-450\"\n        }\n    ],\n    \"status\": \"ACTIVE\",\n    \"departmentId\": \"783497\",\n    \"nonMerchandise\": null,\n    \"familyCode\": \"732897\",\n    \"referenceId\": \"832022\",\n    \"manufacturerCode\": \"46743234\",\n    \"externalIdentifiers\": [\n        {\n            \"type\": \"NACS_CODE\",\n            \"value\": \"3031\"\n        }\n    ],\n    \"posNumber\": \"String\",\n    \"dynamicAttributes\": [\n        {\n            \"type\": \"String\",\n            \"attributes\": [\n                {\n                    \"key\": \"key\",\n                    \"value\": \"value\",\n                    \"localizedValue\": {\n                        \"values\": [\n                            {\n                                \"locale\": \"en-US\",\n                                \"value\": \"sample text\"\n                            },\n                            {\n                                \"locale\": \"fr-ca\",\n                                \"value\": \"Sample text in French Canadian\"\n                            }\n                        ]\n                    }\n                }\n            ]\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{catalog-items-service}}/items/itemObject",
+							"host": [
+								"{{catalog-items-service}}"
+							],
+							"path": [
+								"items",
+								"itemObject"
+							]
+						},
+						"description": "Updates/creates an item's fields for the input item."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Catalog Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"type": "text",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"type": "text",
+								"value": "{{date}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"type": "text",
+								"value": "en-us"
+							}
+						],
+						"url": {
+							"raw": "{{catalog-items-service}}/items/itemObject",
+							"host": [
+								"{{catalog-items-service}}"
+							],
+							"path": [
+								"items",
+								"itemObject"
+							]
+						},
+						"description": "Retrieves full item document by item identifier (code)."
+					},
+					"response": []
+				},
+				{
+					"name": "Find Catalog Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-us",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{catalog-items-service}}/items/?codePattern=*&longDescriptionPattern=*",
+							"host": [
+								"{{catalog-items-service}}"
+							],
+							"path": [
+								"items",
+								""
+							],
+							"query": [
+								{
+									"key": "codePattern",
+									"value": "*"
+								},
+								{
+									"key": "longDescriptionPattern",
+									"value": "*"
+								}
+							]
+						},
+						"description": "Catalog Finder Api: \n   \n   Accept query params to search upon:\n      You can search upon:\n      \n         1. itemCodePattern\n         2. packageIdentifierPattern\n         3. longDescriptionPattern\n         4. shortDescriptionPattern\n         5. itemStatus (Enum accepts ACTIVE OR INACTIVE)\n         6. categoryCode\n         7. sortField (Can be short or long description,Item code\n         8. sortDirection (ASC OR DESC)\n         \n     Above searchable fields can have values in the form of pattern using solr wild card search.\n     \nNote : Look if you are searchiing for the same organization or not. If user is in different org you get the results only for the respective org.\n       \n       For simple testing use the root(/)  org and catalog_user as credentials.\n       For testing with different orgs you need to create user who has catlog roles,  and assign an organization with catalog roles to that user.\n       \nNOTE :Query is an AND operation"
+					},
+					"response": []
+				},
+				{
+					"name": "Create/Update Item-Price",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const date = new Date();\r",
+									"\r",
+									"const uniqueKey = function(date) {\r",
+									"    const nonce = date.toISOString().slice(0, 19) + '.000Z';\r",
+									"    return nonce;\r",
+									"}\r",
+									"\r",
+									"var currentDate = uniqueKey(date);\r",
+									"var currentYear = Number(currentDate.slice(0,4));\r",
+									"currentYear = currentYear ? currentYear+1 : 1;\r",
+									"var endDate = currentYear ? currentYear+1 : 1;\r",
+									"var effectiveDate = currentYear + currentDate.slice(4,24);\r",
+									"var effectiveEndDate = endDate + currentDate.slice(4,24);\r",
+									"pm.globals.set(\"effectiveDate\", effectiveDate);\r",
+									"pm.globals.set(\"effectiveEndDate\", effectiveEndDate);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Langu",
+								"value": "en-us",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"version\":1622123868130,\r\n    \"price\":5.64,\r\n    \"currency\":\"US Dollar\",\r\n    \"effectiveDate\":\"2022-06-27T12:14:29.373Z\",\r\n    \"endDate\":\"2023-09-20T05:15:47.276Z\",\r\n    \"status\":\"ACTIVE\",\r\n    \"basePrice\":false,\r\n    \"linkGroupId\": {\r\n        \"linkGroupCode\": \"29837295\"\r\n    },\r\n    \"itemPriceType\":\"FULL_SERVICE_CREDIT\",\r\n    \"precision\":2,\r\n    \"includesContainer\":true,\r\n    \"quantityPricedItem\":false,\r\n    \"promotionPriceType\":\"NON_CARD_PRICE\",\r\n    \"dynamicAttributes\": [\r\n        {\r\n            \"type\": \"String\",\r\n            \"attributes\": [\r\n                {\r\n                    \"key\": \"key_value\",\r\n                    \"value\": \"dynamic_type_value\",\r\n                    \"localizedValue\": {\r\n                        \"values\": [\r\n                            {\r\n                                \"locale\": \"en-US\",\r\n                                \"value\": \"A dynamic type value in American English\"\r\n                            },\r\n                            {\r\n                                \"locale\": \"fr-ca\",\r\n                                \"value\": \"A dynamic type value in French Canadian\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{catalog-items-service}}/item-prices/canned-tomatoes/priceCode",
+							"host": [
+								"{{catalog-items-service}}"
+							],
+							"path": [
+								"item-prices",
+								"canned-tomatoes",
+								"priceCode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Item-Price Snapshot",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-snapshot-version",
+								"value": "9",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{catalog-items-service}}/item-prices/snapshot",
+							"host": [
+								"{{catalog-items-service}}"
+							],
+							"path": [
+								"item-prices",
+								"snapshot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creates/Updates Item-Attributes",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en-us",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"version\":78,\r\n    \"blockForSale\":false,\r\n    \"longDescription\":\r\n    {\r\n        \"values\":\r\n            [\r\n                {\r\n                   \"locale\":\"en-US\",\r\n                   \"value\":\"sample text\"\r\n                }\r\n            ]\r\n    },\r\n    \"shortDescription\":\r\n    {\r\n        \"values\":\r\n        [\r\n            {\r\n                \"locale\":\"en-US\",\r\n                \"value\":\"sample text\"\r\n            }\r\n        ]\r\n    },\r\n    \"merchandiseCategory\":\r\n    {\r\n        \"nodeId\": \"1-846-188-450\"\r\n    },\r\n    \"status\":\"INACTIVE\",\r\n    \"dynamicAttributes\":[],\r\n    \"groups\":[],\r\n    \"linkGroups\":[],\r\n    \"imageUrls\":[],\r\n    \"locations\":\r\n    [\r\n        {\r\n            \"aisle\":\"Aisle A01\",\r\n            \"shelf\":\"Shelf 1\",\r\n            \"locationType\":\"STORE\",\r\n            \"position\":\"Front\",\r\n            \"longitude\":-84.38965,\r\n            \"latitude\":33.77912\r\n        }\r\n    ],\r\n    \"regulatoryMessages\":\r\n    [\r\n        {\r\n            \"locale\":\"en-US\",\r\n            \"value\":\"sample text\",\r\n            \"messageType\":\"prop-65\",\r\n            \"sequence\":1\r\n        }\r\n    ],\r\n    \"kitchen\":\r\n    {\r\n        \"cookTime\":300,\r\n        \"modifierTime\":10,\r\n        \"modifierPercentage\":20\r\n    },\r\n    \"nutritionFacts\":\r\n    {\r\n        \"servingSize\":\"3/4 cup\",\r\n        \"nutritionAttributes\":\r\n        [\r\n            {\r\n                \"nutritionType\":\"CALORIES\",\r\n                \"units\":\"CALORIES\",\r\n                \"value\":300,\r\n                \"percentDailyValue\":35\r\n            }\r\n        ],\r\n        \"servingPerContainer\":94.8\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{catalog-items-service}}/item-attributes/itemObject",
+							"host": [
+								"{{catalog-items-service}}"
+							],
+							"path": [
+								"item-attributes",
+								"itemObject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Item-Attributes Snapshot",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-snapshot-version",
+								"value": "23",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{catalog-items-service}}/item-attributes/snapshot",
+							"host": [
+								"{{catalog-items-service}}"
+							],
+							"path": [
+								"item-attributes",
+								"snapshot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creates/Updates Link-Group",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var linkGroupCode = \"29837289\"; \r",
+									"postman.setEnvironmentVariable(\"link-group-code\", linkGroupCode);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"version\": 59,\r\n    \"linkGroupType\": \"SUGGESTION\",\r\n    \"description\": {\r\n        \"values\": [\r\n            {\r\n                \"locale\": \"en-US\",\r\n                \"value\": \"sample text\"\r\n            }\r\n        ]\r\n    },\r\n    \"tag\": \"substitutes\",\r\n    \"status\": \"ACTIVE\",\r\n    \"restriction\": {\r\n        \"maxQuantity\": 30,\r\n        \"minQuantity\": 3,\r\n        \"freeQuantity\": 32,\r\n        \"defaultQuantity\": 96,\r\n        \"visibilityScope\": \"INTERNAL\"\r\n    },\r\n    \"linkItems\": [\r\n        {\r\n            \"itemCode\": \"1278932\",\r\n            \"appliedAutomatically\": null,\r\n            \"modifierTime\": 30,\r\n            \"restriction\": {\r\n                \"maxQuantity\": 30,\r\n                \"minQuantity\": 3,\r\n                \"freeQuantity\": 32,\r\n                \"defaultQuantity\": 96,\r\n                \"visibilityScope\": \"INTERNAL\"\r\n            },\r\n            \"itemFactor\": 69,\r\n            \"dynamicAttributes\": [\r\n                {\r\n                    \"type\": \"String\",\r\n                    \"attributes\": [\r\n                        {\r\n                            \"key\": \"key\",\r\n                            \"value\": \"value\",\r\n                            \"localizedValue\": {\r\n                                \"values\": [\r\n                                    {\r\n                                        \"locale\": \"en-US\",\r\n                                        \"value\": \"sample text\"\r\n                                    }\r\n                                ]\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"substitutionGroup\": {\r\n        \"linkGroupCode\": \"29837289\"\r\n    },\r\n    \"posNumber\": \"String\",\r\n    \"dynamicAttributes\": [\r\n        {\r\n            \"type\": \"String\",\r\n            \"attributes\": [\r\n                {\r\n                    \"key\": \"key\",\r\n                    \"value\": \"value\",\r\n                    \"localizedValue\": {\r\n                        \"values\": [\r\n                            {\r\n                                \"locale\": \"en-US\",\r\n                                \"value\": \"sample text\"\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{catalog-items-service}}/link-groups/{{link-group-code}}",
+							"host": [
+								"{{catalog-items-service}}"
+							],
+							"path": [
+								"link-groups",
+								"{{link-group-code}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Link-Group Snapshot",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-enterprise-unit",
+								"value": "{{bsp-site-id}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-snapshot-version",
+								"value": "66",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{catalog-items-service}}/link-groups/snapshot",
+							"host": [
+								"{{catalog-items-service}}"
+							],
+							"path": [
+								"link-groups",
+								"snapshot"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Sites",
+			"item": [
+				{
+					"name": "Create Site",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var siteNum = pm.environment.get(\"site-num\");",
+									"siteNum = siteNum ? siteNum+1 : 1;",
+									"pm.environment.set(\"site-num\", siteNum);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"site-id\", jsonData.id);",
+									"postman.setEnvironmentVariable(\"site-ref-id\", jsonData.referenceId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"siteName\": \"POSTMAN-TEST-SITE-{{site-num}}\",\n  \"enterpriseUnitName\": \"POSTMAN-TEST-SITE-{{site-num}}\",\n  \"hours\": [\n    {\n      \"open\": {\n        \"day\": \"MONDAY\",\n        \"time\": \"0800\"\n      },\n      \"close\": {\n        \"day\": \"MONDAY\",\n        \"time\": \"2000\"\n      }\n    }\n  ],\n  \"contact\": {\n      \"contactPerson\": \"George P. Burdell\",\n      \"phoneNumber\": \"4048942000\",\n      \"phoneNumberCountryCode\": \"1\"\n  },\n  \"timeZone\": \"US/Eastern\",\n  \"locked\": false,\n  \"description\": \"Test Site for Postman Collection\",\n  \"currency\": \"USD\",\n  \"address\": {\n      \"street\": \"North Ave NW\",\n      \"city\": \"Atlanta\",\n      \"state\": \"GA\",\n      \"country\": \"USA\",\n      \"postalCode\": \"30332\"\n  },\n  \"coordinates\": {\n      \"latitude\": 33.7767488,\n      \"longitude\": -84.3984255\n  },\n  \"status\": \"ACTIVE\",\n  \"customAttributeSets\": [],\n  \"referenceId\": \"SITE-REF-{{site-num}}\"\n}"
+						},
+						"url": {
+							"raw": "{{site-service}}/sites",
+							"host": [
+								"{{site-service}}"
+							],
+							"path": [
+								"sites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Site",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"site-id\", jsonData.id);",
+									"postman.setEnvironmentVariable(\"site-ref-id\", jsonData.referenceId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"type": "text",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"siteName\": \"POSTMAN-TEST-SITE-{{site-num}}\",\n  \"enterpriseUnitName\": \"POSTMAN-TEST-SITE-{{site-num}}\",\n  \"hours\": [\n    {\n      \"open\": {\n        \"day\": \"MONDAY\",\n        \"time\": \"0800\"\n      },\n      \"close\": {\n        \"day\": \"MONDAY\",\n        \"time\": \"2000\"\n      }\n    }\n  ],\n  \"contact\": {\n      \"contactPerson\": \"George P. Burdell\",\n      \"phoneNumber\": \"4048942000\",\n      \"phoneNumberCountryCode\": \"1\"\n  },\n  \"timeZone\": \"US/Eastern\",\n  \"locked\": false,\n  \"description\": \"Test Site for Postman Collection\",\n  \"currency\": \"USD\",\n  \"address\": {\n      \"street\": \"North Ave NW\",\n      \"city\": \"Atlanta\",\n      \"state\": \"GA\",\n      \"country\": \"USA\",\n      \"postalCode\": \"30332\"\n  },\n  \"coordinates\": {\n      \"latitude\": 33.7767488,\n      \"longitude\": -84.3984255\n  },\n  \"status\": \"ACTIVE\",\n  \"customAttributeSets\": [],\n  \"referenceId\": \"SITE-REF-{{site-num}}\"\n}"
+						},
+						"url": {
+							"raw": "{{site-service}}/sites/{{site-id}}",
+							"host": [
+								"{{site-service}}"
+							],
+							"path": [
+								"sites",
+								"{{site-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Site",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"site-id\", jsonData.id);",
+									"postman.setEnvironmentVariable(\"site-ref-id\", jsonData.referenceId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"type": "text",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"siteName\": \"POSTMAN-TEST-SITE-{{site-num}}\",\n  \"enterpriseUnitName\": \"POSTMAN-TEST-SITE-{{site-num}}\",\n  \"hours\": [\n    {\n      \"open\": {\n        \"day\": \"MONDAY\",\n        \"time\": \"0800\"\n      },\n      \"close\": {\n        \"day\": \"MONDAY\",\n        \"time\": \"2000\"\n      }\n    }\n  ],\n  \"contact\": {\n      \"contactPerson\": \"George P. Burdell\",\n      \"phoneNumber\": \"4048942000\",\n      \"phoneNumberCountryCode\": \"1\"\n  },\n  \"timeZone\": \"US/Eastern\",\n  \"locked\": false,\n  \"description\": \"Test Site for Postman Collection\",\n  \"currency\": \"USD\",\n  \"address\": {\n      \"street\": \"North Ave NW\",\n      \"city\": \"Atlanta\",\n      \"state\": \"GA\",\n      \"country\": \"USA\",\n      \"postalCode\": \"30332\"\n  },\n  \"coordinates\": {\n      \"latitude\": 33.7767488,\n      \"longitude\": -84.3984255\n  },\n  \"status\": \"ACTIVE\",\n  \"customAttributeSets\": [],\n  \"referenceId\": \"SITE-REF-{{site-num}}\"\n}"
+						},
+						"url": {
+							"raw": "{{site-service}}/sites/{{site-id}}",
+							"host": [
+								"{{site-service}}"
+							],
+							"path": [
+								"sites",
+								"{{site-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Criteria",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"type": "text",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"criteria\": {\n\t  \"status\": \"ACTIVE\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{site-service}}/sites/find-by-criteria",
+							"host": [
+								"{{site-service}}"
+							],
+							"path": [
+								"sites",
+								"find-by-criteria"
+							]
+						},
+						"description": "### Find By Criteria\n##### Query Params\n* pageNumber: Int\n* pageSize: Int"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Reference Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{site-service}}/sites/by-reference-id/{{site-ref-id}}",
+							"host": [
+								"{{site-service}}"
+							],
+							"path": [
+								"sites",
+								"by-reference-id",
+								"{{site-ref-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"type": "text",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{site-service}}/sites/{{site-id}}",
+							"host": [
+								"{{site-service}}"
+							],
+							"path": [
+								"sites",
+								"{{site-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Nearby",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"type": "text",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{site-service}}/sites/find-nearby/33.7767488,-84.3984255",
+							"host": [
+								"{{site-service}}"
+							],
+							"path": [
+								"sites",
+								"find-nearby",
+								"33.7767488,-84.3984255"
+							]
+						},
+						"description": "### Finds nearby Sites\nBe sure to fill lat,lon in path with desired values\n##### Query params\n* radius: Int\n* numSites: Int\n* customAttributes: Array"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "CDM",
+			"item": [
+				{
+					"name": "Create Consumer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"if (response.consumerAccountNumber) {",
+									"    pm.environment.set(\"consumerAccountNumber\", response.consumerAccountNumber);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profileUsername\": \"ruben.bear@ncr.com\",\n  \"salutation\": \"Mr\",\n  \"firstName\": \"Ruben\",\n  \"middleName\": \"The Bear\",\n  \"lastName\": \"Warrior\",\n  \"effectiveDate\": \"2018-01-20\",\n  \"birthDate\": \"1983-05-15\",\n  \"gender\": \"Bear\",\n  \"phone\": \"2281231234\",\n  \"mobile\": \"2281230000\",\n  \"fax\": \"2280001234\",\n  \"identity\": \"identity\",\n  \"homeStore\": \"0123456789\",\n  \"socialSecurityNumber\": \"0000\",\n  \"addresses\": [\n    {\n      \"name\": \"Office\",\n      \"line1\": \"864 Spring St NW\",\n      \"line2\": \"North Tower. 14th Floor\",\n      \"city\": \"Atlanta\",\n      \"state\": \"GA\",\n      \"postalCode\": \"30308\",\n      \"extPostalCode\": \"0000\",\n      \"country\": \"USA\"\n    }\n  ],\n  \"identifiersData\": [\n    {\n      \"fieldName\": \"loyaltyCard\",\n      \"fieldValue\": \"1234567890\",\n      \"status\": \"ACTIVE\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{cdm-service}}/consumers",
+							"host": [
+								"{{cdm-service}}"
+							],
+							"path": [
+								"consumers"
+							]
+						},
+						"description": "Create a consumer with identifiers"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Consumer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{cdm-service}}/consumers/{{consumerAccountNumber}}",
+							"host": [
+								"{{cdm-service}}"
+							],
+							"path": [
+								"consumers",
+								"{{consumerAccountNumber}}"
+							]
+						},
+						"description": "Get a consumer using a consumerAccountNumber"
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Consumer",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profileUsername\": \"ruben.bear@ncr.com\",\n  \"salutation\": \"Mr\",\n  \"firstName\": \"Ruben\",\n  \"middleName\": \"The Bear\",\n  \"lastName\": \"Warrior\",\n  \"effectiveDate\": \"2018-01-20\",\n  \"birthDate\": \"1983-05-15\",\n  \"gender\": \"Bear\",\n  \"phone\": \"2281231234\",\n  \"mobile\": \"2281230000\",\n  \"fax\": \"2280001234\",\n  \"identity\": \"identity\",\n  \"homeStore\": \"0123456789\",\n  \"socialSecurityNumber\": \"0000\",\n  \"addresses\": [\n    {\n      \"name\": \"Office\",\n      \"line1\": \"864 Spring St NW\",\n      \"line2\": \"North Tower. 14th Floor\",\n      \"city\": \"Atlanta\",\n      \"state\": \"GA\",\n      \"postalCode\": \"30308\",\n      \"extPostalCode\": \"0000\",\n      \"country\": \"USA\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{cdm-service}}/consumers/{{consumerAccountNumber}}",
+							"host": [
+								"{{cdm-service}}"
+							],
+							"path": [
+								"consumers",
+								"{{consumerAccountNumber}}"
+							]
+						},
+						"description": "Patch consumer patches the fields that are sent as part of the request payload"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Consumer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"salutation\": \"Mr\",\n    \"firstName\": \"Ruben\",\n    \"middleName\": \"The Bear\",\n    \"lastName\": \"Warrior\",\n    \"effectiveDate\": \"2018-01-20\",\n    \"birthDate\": \"1983-05-15\",\n    \"fax\": \"2280001234\",\n    \"socialSecurityNumber\": \"0000\",\n    \"addresses\": [],\n    \"identifiersData\": [\n        {\n            \"fieldName\": \"loyaltyCard\",\n            \"fieldValue\": \"nmnmnm123\",\n            \"status\": \"ACTIVE\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{cdm-service}}/consumers/{{consumerAccountNumber}}/update",
+							"host": [
+								"{{cdm-service}}"
+							],
+							"path": [
+								"consumers",
+								"{{consumerAccountNumber}}",
+								"update"
+							]
+						},
+						"description": "Update consumer will do a full replace of a consumer. If fields are missing it will be omitted while re-creating the consumer"
+					},
+					"response": []
+				},
+				{
+					"name": "Find Consumer(s)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{bsp-access-key}}"
+							},
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"searchCriteria\": {\n       \"firstName\": \"john\"\n    },\n    \"operator\": \"AND\",\n    \"pageStart\": 0,\n    \"pageSize\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cdm-service}}/consumers/find",
+							"host": [
+								"{{cdm-service}}"
+							],
+							"path": [
+								"consumers",
+								"find"
+							]
+						},
+						"description": "Find consumer in your organization using a `searchCriteria`. Refer to Devex for all supported `searchCriteria`"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "Secondary Image Calls",
+					"item": [
+						{
+							"name": "Retrieve all images of an org",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true,
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "nep-enterprise-unit",
+										"value": "{{bsp-site-id}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "nep-organization",
+										"value": "{{bsp-organization}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bsp-access-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Date",
+										"value": "{{date}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pageNumber\": 0,\r\n    \"pageSize\": 20,\r\n    \"imageSortCriteria\": {\r\n        \"sortFields\": [\r\n            \"UPLOAD_DATE_TIME\"\r\n        ],\r\n        \"sortDirection\": \"ASC\"\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "{{image-service}}/find-by-criteria",
+									"host": [
+										"{{image-service}}"
+									],
+									"path": [
+										"find-by-criteria"
+									]
+								},
+								"description": "### *Find By Criteria*\n\nThis call retrieves all images of an organization or an enterprise unit that meet the specified criteria request.\n\n__In order to be retrieved, the search criteria must be an exact match for the attributes of the searched image.__\n\nThe specified search criteria includes: \n\n```Json\n{\n    \"pageNumber\": 0,\n    \"pageSize\": 200,\n    \"fileNamePattern\": \"String\",\n    \"imageNamePattern\": \"String\",\n    \"imageTagPattern\": \"String\",\n    \"imageSortCriteria\": {\n        \"sortFields\": [\n            \"FILE_NAME\",\n            \"FILE_SIZE\",\n            \"UPLOAD_DATE_TIME\"\n        ],\n        \"sortDirection\": \"ASC\"\n    }\n}\n```"
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieves multiple images for an org",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "nep-organization",
+										"value": "{{bsp-organization}}",
+										"type": "text"
+									},
+									{
+										"key": "nep-enterprise-unit",
+										"value": "{{bsp-site-id}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bsp-access-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Date",
+										"value": "{{date}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"imageIds\": [\r\n        {\r\n            \"id\": \"imageID\"\r\n        }\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "{{image-service}}/find-multiple",
+									"host": [
+										"{{image-service}}"
+									],
+									"path": [
+										"find-multiple"
+									]
+								},
+								"description": "### *Find Multiple*\n\nThis call retrieves all images of an organization based on the requested image ID(s).\n\n__To search multiple image IDs, enter each ID into the JSON array \"imageIds\"__ \n\n```JSON\n{\n    \"imageIds\": [\n        {\n            \"id\": \"imageID1\"\n        },\n        {\n            \"id\": \"imageID2\"\n        },\n        {\n            \"id\": \"imageID3\"\n        }\n    ]\n}\n```"
+							},
+							"response": []
+						},
+						{
+							"name": "Transform images",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bsp-access-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Date",
+										"value": "{{date}}",
+										"type": "text"
+									},
+									{
+										"key": "nep-organization",
+										"value": "{{bsp-organization}}",
+										"type": "text"
+									},
+									{
+										"key": "nep-enterprise-unit",
+										"value": "{{bsp-site-id}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"imageIds\": [\r\n        {\r\n            \"id\": \"imageID\"\r\n        }\r\n    ],\r\n    \"quality\": 50,\r\n    \"width\": 1000,\r\n    \"height\": 500,\r\n    \"fitMode\": \"COVER\"\r\n}"
+								},
+								"url": {
+									"raw": "{{image-service}}/transformation",
+									"host": [
+										"{{image-service}}"
+									],
+									"path": [
+										"transformation"
+									]
+								},
+								"description": "### *Transform Image Metadata*\n\nThis call transforms and retrieves details of all transformed images based on the requirements in the request.\n\n__To transform multiple images, enter each ID into the JSON array \"imageIds\"__ \n\n```JSON\n{\n    \"imageIds\": [\n        {\n            \"id\": \"id1\"\n        },\n        {\n            \"id\": \"id2\"\n        },\n        {\n            \"id\": \"id3\"\n        }\n    ],\n    \"quality\": int,\n    \"width\": int,\n    \"height\": int,\n    \"fitMode\": [\n         \"COVER\",\n         \"BOUNDS\",\n         \"CROP\",\n     ]\n}\n```"
+							},
+							"response": []
+						},
+						{
+							"name": "Get an image by imageId",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{bsp-access-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Date",
+										"value": "{{date}}",
+										"type": "text"
+									},
+									{
+										"key": "nep-organization",
+										"value": "{{bsp-organization}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{image-service}}/imageID",
+									"host": [
+										"{{image-service}}"
+									],
+									"path": [
+										"imageID"
+									]
+								},
+								"description": "### *Get By Image ID*\n\nGet an image by its image ID."
+							},
+							"response": []
+						},
+						{
+							"name": "Patch metadata",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bsp-access-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Date",
+										"value": "{{date}}",
+										"type": "text"
+									},
+									{
+										"key": "nep-organization",
+										"value": "{{bsp-organization}}",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tags\": [\r\n        \"tag3\",\r\n        \"tag4\"\r\n    ],\r\n    \"imageName\": \"Patched Image Name\"\r\n}"
+								},
+								"url": {
+									"raw": "{{image-service}}/imageID",
+									"host": [
+										"{{image-service}}"
+									],
+									"path": [
+										"imageID"
+									]
+								},
+								"description": "### *Patch Image Metadata*\n\nPatch the metadata of an image by its unique identifier."
+							},
+							"response": []
+						},
+						{
+							"name": "Replace an image",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "nep-organization",
+										"value": "{{bsp-organization}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bsp-access-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Date",
+										"value": "{{date}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "imageFile",
+											"contentType": "application/octet-stream",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "imageUpdateRequest",
+											"value": "{ \n  \"imageName\": \"Replaced Image\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"fileName\": \"fileName\",\n  \"status\": \"ACTIVE\"\n}",
+											"contentType": "application/json",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{image-service}}/imageID",
+									"host": [
+										"{{image-service}}"
+									],
+									"path": [
+										"imageID"
+									]
+								},
+								"description": "### *Replace an image*\n\nReplace an image, and optionally update its metadata properties.\n\n__In order for an image to be replaced, an image file must be selected within the body before the call is sent.__ \n\nAppropriate image file types include:\n<ul>\n<li>.jpg</li>\n<li>.png</li>\n<li>.gif</li>\n</ul>\n\n__The Multipart/Form-Data must include the following:__ \n\n| Key                      | Value                    | Content Type             |\n| ------------------------ | ------------------------ | ------------------------ |\n| imageFile                | Replaced Image File      | application/octet-stream |\n| imageUpdateRequest       | Json Data Body           | application/json         |\n\n\n\n```Json\n{\n  \"imageName\": \"String\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"fileName\": \"fileName\",\n  \"status\": \"ACTIVE\"\n}\n```"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Upload an Image",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "nep-organization",
+								"value": "{{bsp-organization}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bsp-access-key}}",
+								"type": "text"
+							},
+							{
+								"key": "Date",
+								"value": "{{date}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageFile",
+									"contentType": "application/octet-stream",
+									"description": "Add your image to the value field with the Select Files button.(JPG, PNG, GIF)",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "imageWriteData",
+									"value": "{\n  \"imageName\": \"New Image Name\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"id\": \"imageID\",\n  \"fileName\": \"fileName\",\n  \"status\": \"ACTIVE\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{image-service}}",
+							"host": [
+								"{{image-service}}"
+							]
+						},
+						"description": "### *Upload an image*\n\nUpload an image with a unique image identifier\n\n__In order for an image to be uploaded, an image file must be selected within the body before the call is sent.__ \n\nAppropriate image file types include:\n<ul>\n<li>.jpg</li>\n<li>.png</li>\n<li>.gif</li>\n</ul>\n\n__The Multipart/Form-Data must include the following:__ \n\n| Key                      | Value                    | Content Type             |\n| ------------------------ | ------------------------ | ------------------------ |\n| imageFile                | Uploaded Image File      | application/octet-stream |\n| imageWriteDate           | Json Data Body           | application/json         |\n\n```Json\n{\n  \"imageName\": \"String\",\n  \"tags\": [\n    \"tag1\",\n    \"tag2\"\n  ],\n  \"id\": \"imageID\",\n  \"fileName\": \"fileName\",\n  \"status\": \"ACTIVE\"\n}\n```"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//Services for products should be added here",
+					"postman.setEnvironmentVariable(\"api-gateway\", \"https://gateway-staging.ncrcloud.com\");",
+					"postman.setEnvironmentVariable(\"site-service\", pm.environment.get(\"api-gateway\") + \"/site\");",
+					"postman.setEnvironmentVariable(\"security-service\", pm.environment.get(\"api-gateway\") + \"/security\");",
+					"postman.setEnvironmentVariable(\"order-service\", pm.environment.get(\"api-gateway\") + \"/order/3/orders/1\");",
+					"postman.setEnvironmentVariable(\"tdm-service\", pm.environment.get(\"api-gateway\") + \"/transaction-document/transaction-documents\");",
+					"postman.setEnvironmentVariable(\"cdm-service\", pm.environment.get(\"api-gateway\") + \"/cdm\")",
+					"postman.setEnvironmentVariable(\"catalog-items-service\", pm.environment.get(\"api-gateway\") + \"/catalog/v2\");",
+					"postman.setEnvironmentVariable(\"image-service\", pm.environment.get(\"api-gateway\") + \"/image/v1/images\");",
+					"",
+					"// Any required fields for a call should be added here",
+					"postman.setEnvironmentVariable(\"bsp-organization\", \"test-drive-d02d7dbfb5d34d80b73f1\");",
+					"postman.setEnvironmentVariable(\"bsp-site-id\", \"7efd869cd37f4decb212704aad532eb4\");",
+					"postman.setEnvironmentVariable(\"bsp-shared-key\", \"95b15046be3d422fbab15d07bfd1cc99\");",
+					"postman.setEnvironmentVariable(\"bsp-secret-key\", \"759d6e3fa82040878e8a58ccdb10bce9\");",
+					"// Ensures any content has variables substituted; supports recursive",
+					"// resolution (environment variable that references environment/global variables)",
+					"const convertVariables = function(templateContent) {",
+					"    const regexPattern = /({{(.*?)}})/g;",
+					"    let convertedContent = templateContent;",
+					"    let matchedVar = new RegExp(regexPattern).exec(convertedContent);",
+					"    while (matchedVar !== null) {",
+					"        const variableReplacement = matchedVar[1];",
+					"        const variableName = matchedVar[2];",
+					"        const variableValue = postman.getEnvironmentVariable(variableName) || postman.getGlobalVariable(variableName);",
+					"        convertedContent = convertedContent.replace(variableReplacement, variableValue);",
+					"        matchedVar = new RegExp(regexPattern).exec(convertedContent);",
+					"    }",
+					"    return convertedContent;",
+					"}",
+					"// Extracts the signable content from the request",
+					"const signableContent = function() {",
+					"    const requestPath = convertVariables(request.url.trim()).replace(/^https?:\\/\\/[^\\/]+\\//, '/');",
+					"    const params = [",
+					"        request.method,",
+					"        requestPath,",
+					"        request.headers['content-type'],",
+					"        request.headers['content-md5'],",
+					"        convertVariables(request.headers['nep-organization'])",
+					"    ];",
+					"    return params.filter(p => p && p.length > 0).join('\\n');",
+					"}",
+					"// Generates a unique date-based signing key",
+					"const uniqueKey = function(date) {",
+					"    const nonce = date.toISOString().slice(0, 19) + '.000Z';",
+					"    return postman.getEnvironmentVariable('bsp-secret-key') + nonce;",
+					"}",
+					"// Calculates the HMAC signature",
+					"const calculateSignature = function() {",
+					"    const date = new Date();",
+					"    postman.setEnvironmentVariable('date', date.toGMTString());",
+					"    const key = uniqueKey(date);",
+					"    const sc = signableContent();",
+					"    const hmac = CryptoJS.HmacSHA512(sc, key);",
+					"    return CryptoJS.enc.Base64.stringify(hmac);",
+					"}",
+					"// Stores the generated HMAC signature under the access key",
+					"const signature = calculateSignature();",
+					"const sharedKey = postman.getEnvironmentVariable('bsp-shared-key');",
+					"postman.setEnvironmentVariable('bsp-access-key', `AccessKey ${sharedKey}:${signature}`);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
